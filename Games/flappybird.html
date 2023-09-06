@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="website icon" type="png" href="/images/title_logo.png">
+    <title>Fly the Bird</title>
+    <style>
+        body {
+            text-align: center;
+        }
+
+        #h4 {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <h4 id="h4">Press 'SPACE-BAR' to Play</h4>
+    </div>
+</body>
+<script type="module">
+
+    import kaboom from "https://unpkg.com/kaboom/dist/kaboom.mjs";
+
+    kaboom();
+
+    loadSprite("birdy", "./img/birdy.png");
+    loadSprite("bg", "./img/bg.png");
+    loadSprite("pipe", "./img/pipe.png");
+
+    let highScore = 0;
+
+    scene("game", () => {
+        const PIPE_GAP = 120;
+        let score = 0;
+
+        add([
+            sprite("bg", { width: width(), height: height() })
+        ]);
+
+        const scoreText = add([
+            text(score, { size: 50 })
+        ]);
+
+        const player = add([
+            sprite("birdy"),
+            scale(2),
+            pos(80, 40),
+            area(),
+            body(),
+        ]);
+
+        function producePipes() {
+            const offset = rand(-50, 50);
+
+            add([
+                sprite("pipe"),
+                pos(width(), height() / 2 + offset + PIPE_GAP / 2),
+                "pipe",
+                area(),
+                { passed: false }
+            ]);
+
+            add([
+                sprite("pipe", { flipY: true }),
+                pos(width(), height() / 2 + offset - PIPE_GAP / 2),
+                origin("botleft"),
+                "pipe",
+                area()
+            ]);
+        }
+
+        loop(1.5, () => {
+            producePipes();
+        });
+
+        action("pipe", (pipe) => {
+            pipe.move(-160, 0);
+
+            if (pipe.passed === false && pipe.pos.x < player.pos.x) {
+                pipe.passed = true;
+                score += 1;
+                scoreText.text = score;
+            }
+        });
+
+        player.collides("pipe", () => {
+            go("gameover", score);
+        });
+
+        player.action(() => {
+            if (player.pos.y > height() + 30 || player.pos.y < -30) {
+                go("gameover", score);
+            }
+        });
+
+        keyPress("space", () => {
+            // play("wooosh");
+            player.jump(400);
+        });
+    });
+
+    scene("gameover", (score) => {
+        if (score > highScore) {
+            highScore = score;
+
+            var getflappy_score = highScore.toString();
+            localStorage.setItem("flappy_key", getflappy_score);
+        }
+
+        add([
+            text("gameover!\n" + "score: " + score + "\nhigh score: " + highScore + "\n" + "\nPress 'SPACE-BAR' to Restart", { size: 50 })
+        ]);
+
+        keyPress("space", () => {
+            go("game");
+        });
+    });
+
+    go("game");
+</script>
+
+</html>

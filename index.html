@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Arcade Games Paradise</title>
+    <link rel="website icon" type="png" href="/images/title_logo.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="style.css" rel="Stylesheet" type="text/css">
+    <link rel="stylesheet" href="login_singup.css" />
+
+
+
+</head>
+
+<body>
+    <header>
+        <div class="flex">
+            <div class="logo">
+                <a href="javascript:window.location.reload(true)">
+                    <img src="images/header_logo.png" alt="Logo">
+                </a>
+            </div>
+            <nav>
+                <ul id="nav-menu-container">
+                    <li>
+                        <a href="/profile.html" id="profile" style="display: none;">Profile</a>
+                    </li>
+                    <li>
+                        <a href="#latest-news">Games</a>
+                    </li>
+                    <li>
+                        <a href="/contact.html" target="_blank">Contact</a>
+                    </li>
+                    <li>
+                        <a href="/support.html" target="_blank">Support</a>
+                    </li>
+                    <li>
+                        <a href="/about.html" target="_blank">About</a>
+                    </li>
+                </ul>
+            </nav>
+            <a href="#login_signup_box" id="login_signup" class="login-register-button">Login / Sign-up</a>
+            <a id="logoutBtn" href="" class="login-register-button" style="display: none;">Log Out</a>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero-image">
+            <div class="hero-marketing-text">
+                <h2>
+                    The Best
+                    <span>Games</span>
+                    Out There
+                </h2>
+                <h5>Free to Play.<br>
+                    Eat. Sleep. Game. Repeat.<br>
+                    Games don't make you violent, lag does.</h5>
+            </div>
+        </section>
+
+        <!-- login/signup -->
+        <div>
+            <div id="login_signup_box" style="background-color: #131313; height: 50px; margin-bottom: 10px;"></div>
+
+            <div id="login_signup_div" style="margin: 30px 80px;">
+
+                <div class="container">
+
+                    <div class="forms-container">
+                        <div class="signin-signup">
+
+                            <form class="sign-in-form">
+                                <h2 class="title">Login</h2>
+                                <div class="input-field">
+                                    <i class="fas fa-user"></i>
+                                    <input id="login_email" type="text" placeholder="Email" required />
+                                </div>
+                                <div class="input-field">
+                                    <i class="fas fa-lock"></i>
+                                    <input id="login_password" type="password" placeholder="Password" required />
+                                </div>
+                                <input id="loginBtn" value="Login" class="btn solid" />
+                            </form>
+
+
+                            <form class="sign-up-form">
+                                <h2 class="title">Sign-up</h2>
+                                <div class="input-field">
+                                    <i class="fas fa-user"></i>
+                                    <input id="name" type="text" placeholder="Name" required />
+                                </div>
+                                <div class="input-field">
+                                    <i class="fas fa-envelope"></i>
+                                    <input id="signup_email" type="email" placeholder="Email" required />
+                                </div>
+                                <div class="input-field">
+                                    <i class="fas fa-lock"></i>
+                                    <input id="signup_password" type="password" placeholder="Password" required />
+                                </div>
+                                <input id="signupBtn" class="btn" value="Sign up" />
+                            </form>
+
+                        </div>
+                    </div>
+
+
+                    <div class="panels-container">
+                        <div class="panel left-panel">
+                            <div class="content">
+                                <h3>New here ?</h3>
+                                <p>
+                                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis,
+                                    ex ratione
+                                </p>
+                                <button id="sign-up-btn" class="btn2 transparent">
+                                    Sign up
+                                </button>
+                            </div>
+                            <img src="/images/login.svg" class="image" alt="img" />
+                        </div>
+                        <div class="panel right-panel">
+                            <div class="content">
+                                <h3>One of us ?</h3>
+                                <p>
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                </p>
+                                <button id="sign-in-btn" class="btn2 transparent">
+                                    Login
+                                </button>
+                            </div>
+                            <img src="/images/register.svg" class="image" alt="img" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+
+                const sign_in_btn = document.querySelector("#sign-in-btn");
+                const sign_up_btn = document.querySelector("#sign-up-btn");
+                const container = document.querySelector(".container");
+
+                sign_up_btn.addEventListener("click", () => {
+                    container.classList.add("sign-up-mode");
+                });
+
+                sign_in_btn.addEventListener("click", () => {
+                    container.classList.remove("sign-up-mode");
+                });
+
+            </script>
+
+        </div>
+
+        <section id="latest-news">
+            <div class="flex">
+                <h5>Latest News</h5>
+                <div id="latest-news-container">
+                    <div class="latest-news-item">
+                        <span class="badge sky">New</span>
+                        <span class="latest-news-text">Lorem ipsum dolor sit amet, consectectur adipiscing elit
+                            ipsum.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div id="games-tab">
+            <section id="game-types-boxes">
+                <div class="flex">
+                    <div class="box r1c1">
+                        <a href="./Games/pong.html" target="_blank">
+                            <div class="shade"></div>
+                            <span class="badge red">latest</span>
+                            <div class="contents">
+                                <h4>Ping Pong</h4>
+                                <p>Lorem ipsum dolor sit amet, consectectur adipiscing elit.</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="box r1c2">
+                        <!-- <a href="./Games/flappybird.html" target="_blank"> -->
+                        <div class="shade"></div>
+                        <span class="badge green">maintenance</span>
+                        <div class="contents">
+                            <h4>Flappy Bird</h4>
+                            <p>Lorem ipsum dolor sit amet, consectectur adipiscing elit.</p>
+                        </div>
+                        <!-- </a> -->
+                    </div>
+                    <div class="box r1c3">
+                        <A href="./Games/dino.html" target="_blank">
+                            <div class="shade"></div>
+                            <div class="contents">
+                                <h4>Dino</h4>
+                                <p>Lorem ipsum dolor sit amet, consectectur adipiscing elit.</p>
+                            </div>
+                        </A>
+                    </div>
+                    <div class="box r1c4">
+                        <a href="./Games/tetris.html" target="_blank">
+                            <div class="shade"></div>
+                            <div class="contents">
+                                <h4>Tetris</h4>
+                                <p>Lorem ipsum dolor sit amet, consectectur adipiscing elit.</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+            <section id="game-types-boxes">
+                <div class="flex">
+                    <div class="box r2c1">
+                        <a href="./Games/snake.html" target="_blank">
+                            <div class="shade"></div>
+                            <div class="contents">
+                                <h4>Snake Game</h4>
+                                <p>Lorem ipsum dolor sit amet, consectectur adipiscing elit.</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="box r2c2">
+                        <a href="./Games/sudoku.html" target="_blank">
+                            <div class="shade"></div>
+                            <div class="contents">
+                                <h4>Sudoku</h4>
+                                <p>Lorem ipsum dolor sit amet, consectectur adipiscing elit.</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="box r2c3">
+                        <a href="./Games/space.html" target="_blank">
+                            <div class="shade"></div>
+                            <div class="contents">
+                                <h4>Space Invaders</h4>
+                                <p>Lorem ipsum dolor sit amet, consectectur adipiscing elit.</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="box r2c4">
+                        <a href="./Games/catch_apple.html" target="_blank">
+                            <div class="shade"></div>
+                            <div class="contents">
+                                <h4>Catch the Apple</h4>
+                                <p>Lorem ipsum dolor sit amet, consectectur adipiscing elit.</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+            <section id="game-types-boxes">
+                <div class="flex">
+                    <div class="box r3c1">
+                        <a href="./Games/tictaktoe.html" target="_blank">
+                            <div class="shade"></div>
+                            <div class="contents">
+                                <h4>Tik Tac Toe</h4>
+                                <p>Lorem ipsum dolor sit amet, consectectur adipiscing elit.</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="box r3c2">
+                        <a href="./Games/2048.html" target="_blank">
+                            <div class="shade"></div>
+                            <div class="contents">
+                                <h4>2048 Game</h4>
+                                <p>Lorem ipsum dolor sit amet, consectectur adipiscing elit.</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="box r3c3">
+                        <a href="./Games/rockpaper.html" target="_blank">
+                            <div class="shade"></div>
+                            <div class="contents">
+                                <h4>Rock Paper Scissors</h4>
+                                <p>Lorem ipsum dolor sit amet, consectectur adipiscing elit.</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="box r3c4">
+                        <a href="./Games/connect4.html" target="_blank">
+                            <div class="shade"></div>
+                            <div class="contents">
+                                <h4>Connect 4</h4>
+                                <p>Lorem ipsum dolor sit amet, consectectur adipiscing elit.</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+            <div class="coming-games">
+                <hr>
+                <h2>Up Coming Games</h2>
+            </div>
+            <section id="game-types-boxes">
+                <div class="flex">
+                    <div class="box r4c1">
+
+                        <div class="shade"></div>
+                        <span class="badge red">Coming</span>
+                        <div class="contents">
+                            <h4>Memory Game</h4>
+                            <p>Lorem ipsum dolor sit amet, consectectur adipiscing elit.</p>
+                        </div>
+
+                    </div>
+                    <div class="box r4c2">
+
+                        <div class="shade"></div>
+                        <span class="badge green">Coming</span>
+                        <div class="contents">
+                            <h4>Slide Puzzle</h4>
+                            <p>Lorem ipsum dolor sit amet, consectectur adipiscing elit.</p>
+                        </div>
+
+                    </div>
+                    <div class="box r4c3">
+
+                        <div class="shade"></div>
+                        <span class="badge blue">Coming</span>
+                        <div class="contents">
+                            <h4>MineSweeper</h4>
+                            <p>Lorem ipsum dolor sit amet, consectectur adipiscing elit.</p>
+                        </div>
+
+                    </div>
+                    <div class="box r4c4">
+
+                        <div class="shade"></div>
+                        <span class="badge yellow">Coming</span>
+                        <div class="contents">
+                            <h4>Chess</h4>
+                            <p>Lorem ipsum dolor sit amet, consectectur adipiscing elit.</p>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <section id="posts-comments">
+                <div class="flex">
+                    <div class="game-warrior">
+                        <h5 style="font-weight:bold;">Arcade Games Paradise</h5>
+                        <p>Lorem ipsum dolor sit amet, consectectur adipiscing ipsum.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="flex">
+            <small>
+                Copyright &copy; 2024 All rights reserved
+
+                by
+                <a href="https://www.google.co.in/" target="_blank">Arcade Games Paradise</a>.
+            </small>
+            <ul>
+                <li>
+                    <a href="#top">Home</a>
+                </li>
+                <li>
+                    <a href="/support.html" target="_blank">Support</a>
+                </li>
+                <li>
+                    <a href="/contact.html" target="_blank">Contact</a>
+                </li>
+                <li>
+                    <a href="/about.html" target="_blank">About</a>
+                </li>
+            </ul>
+        </div>
+    </footer>
+
+</body>
+
+<script type="module" src="app.js"></script>
+
+</html>

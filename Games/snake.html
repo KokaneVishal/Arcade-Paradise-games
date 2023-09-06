@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="website icon" type="png" href="/images/title_logo.png">
+  <title>Snake Game</title>
+
+  <style>
+    body {
+      font-weight: bold;
+      text-align: center;
+      font-family: "Courier New", Courier, monospace;
+      background-color: aquamarine;
+    }
+
+    #head1 {
+      text-shadow: 2px 2px rgb(30, 190, 38);
+    }
+
+    #board {
+      border-color: rgb(255, 0, 0);
+      border-style: dotted;
+    }
+
+    #scored {
+      height: 20px;
+      width: 512px;
+      column-count: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #main-mid-div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+</head>
+
+<body>
+  <h2 id="head1">Snake Game</h2>
+  <div id="main-mid-div">
+    <div id="scored">
+      <div id="sscore" style="font-weight: bold; flex: 50%;"></div>
+      <div id="hhscore" style="font-weight: bold; flex: 50%;"></div>
+    </div>
+  </div>
+  <canvas id="board"></canvas>
+</body>
+
+<script>
+
+  var blockSize = 20;
+  var rows = 20;
+  var cols = 20;
+  var board;
+  var context;
+
+  //snake head
+  var snakeX = blockSize * 5;
+  var snakeY = blockSize * 5;
+
+  var velocityX = 0;
+  var velocityY = 0;
+
+  var snakeBody = [];
+
+  //food
+  var foodX;
+  var foodY;
+
+  //Score
+  var score = 0;
+  var highScore = localStorage.getItem("snake_key");
+  if (highScore == null) {
+    highScore = 0;
+  } else {
+    highScore = parseInt(highScore);
+  }
+
+  var gameOver = false;
+
+  //drawing on the board
+  window.onload = function () {
+    board = document.getElementById("board");
+    board.height = rows * blockSize;
+    board.width = cols * blockSize;
+    context = board.getContext("2d");
+    context.shadowBlur = 10;
+    context.shadowColor = "red";
+    context.fillRect(20, 20, 100, 80);
+
+    placeFood();
+    document.addEventListener("keyup", changeDirection);
+    setInterval(update, 1000 / 5);
+  };
+
+  //update
+  function update() {
+    if (gameOver) {
+      return;
+    }
+
+    context.fillStyle = "black";
+    context.fillRect(0, 0, board.width, board.height);
+
+    context.fillStyle = "aqua";
+    context.fillRect(foodX, foodY, blockSize, blockSize);
+
+    if (snakeX == foodX && snakeY == foodY) {
+      snakeBody.push([foodX, foodY]);
+      placeFood();
+      score++;
+    }
+
+    for (let i = snakeBody.length - 1; i > 0; i--) {
+      snakeBody[i] = snakeBody[i - 1];
+    }
+    if (snakeBody.length) {
+      snakeBody[0] = [snakeX, snakeY];
+    }
+
+    context.fillStyle = "red";
+    snakeX += velocityX * blockSize;
+    snakeY += velocityY * blockSize;
+    context.fillRect(snakeX, snakeY, blockSize, blockSize);
+    for (let i = 0; i < snakeBody.length; i++) {
+      context.fillRect(snakeBody[i][0], snakeBody[i][1], blockSize, blockSize);
+    }
+
+    //score show
+    var vscore = document.getElementById("sscore");
+    vscore.innerHTML = "Score = " + score;
+
+    //high score
+    var hScore = document.getElementById("hhscore");
+    hScore.innerHTML = "High Score = " + highScore;
+
+    if (score > highScore) {
+      highScore = score;
+      getsnake_score = highScore.toString();
+      localStorage.setItem("snake_key", getsnake_score);
+    }
+
+    //game over conditions
+    //canvas collision
+    if (snakeX < 0 || snakeX > cols * blockSize || snakeY < 0 || snakeY > rows * blockSize) {
+      gameOver = true;
+      if (
+        confirm("Game Over...! \n Press 'OK' to Restart game"
+        )
+      ) {
+        window.location = "";
+      }
+    }
+
+
+    //body collision
+    for (let i = 0; i < snakeBody.length; i++) {
+      if (snakeX == snakeBody[i][0] && snakeY == snakeBody[i][1]) {
+        gameOver = true;
+        if (
+          confirm("Game Over...! \n Press 'OK' to Restart game"
+          )
+        ) {
+          window.location = "";
+        }
+      }
+    }
+  }
+
+  //Arrow key and Snake
+  function changeDirection(e) {
+    if (e.code == "ArrowUp" && velocityY != 1) {
+      velocityX = 0;
+      velocityY = -1;
+    } else if (e.code == "ArrowDown" && velocityY != -1) {
+      velocityX = 0;
+      velocityY = 1;
+    } else if (e.code == "ArrowLeft" && velocityX != 1) {
+      velocityX = -1;
+      velocityY = 0;
+    } else if (e.code == "ArrowRight" && velocityX != -1) {
+      velocityX = 1;
+      velocityY = 0;
+    }
+  }
+
+  function placeFood() {
+    foodX = Math.floor(Math.random() * cols) * blockSize;
+    foodY = Math.floor(Math.random() * rows) * blockSize;
+  }
+
+
+</script>
+
+</html>

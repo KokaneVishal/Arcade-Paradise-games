@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="website icon" type="png" href="/images/title_logo.png">
+  <title>Rock Paper Scissors</title>
+
+</head>
+
+<body>
+  <h3>Rock Paper Scissors</h3>
+  <h4 id="opponent-score">Computer Score = 0</h4>
+  <div>
+    <img id="opponent-choice">
+    <br>
+    <img id="your-choice">
+  </div>
+  <div id="choices"></div>
+  <h4 id="your-score">Your Score = 0</h4>
+
+  <style>
+    body {
+      text-align: center;
+      background: wheat;
+    }
+
+    #opponent-choice {
+      font-weight: bold;
+      width: 200px;
+      height: 150px;
+      background: rgb(98, 255, 255);
+      margin-top: 10px;
+    }
+
+    #your-choice {
+      font-weight: bold;
+      width: 200px;
+      height: 150px;
+      background: rgb(255, 255, 97);
+      margin-top: 10px;
+    }
+
+    #choices {
+      width: 240px;
+      height: 80px;
+      margin: 0 auto;
+      margin-bottom: 10px;
+      margin-top: 10px;
+    }
+
+    #choices img {
+      width: 80px;
+      height: 80px;
+    }
+  </style>
+
+</body>
+
+<script>
+
+  var you;
+  var yourScore = 0;
+  var opponent;
+  var opponentScore = 0;
+
+  var choices = ["rock", "paper", "scissors"];
+
+  window.onload = function () {
+    for (let i = 0; i < 3; i++) {
+      let choice = document.createElement("img");
+      choice.id = choices[i];
+      choice.src = choices[i] + ".png";
+      choice.addEventListener("click", selectChoice);
+      document.getElementById("choices").append(choice);
+    }
+  };
+
+  function selectChoice() {
+    you = this.id;
+    document.getElementById("your-choice").src = you + ".png";
+
+    //random for oppponent
+    opponent = choices[Math.floor(Math.random() * 3)];
+    document.getElementById("opponent-choice").src = opponent + ".png";
+
+    //check for winner
+    if (you == opponent) {
+      // yourScore += 1;
+      // opponentScore += 1;
+    } else {
+      if (you == "rock") {
+        if (opponent == "scissors") {
+          yourScore += 1;
+        } else if (opponent == "paper") {
+          opponentScore += 1;
+        }
+      } else if (you == "scissors") {
+        if (opponent == "paper") {
+          yourScore += 1;
+        } else if (opponent == "rock") {
+          opponentScore += 1;
+        }
+      } else if (you == "paper") {
+        if (opponent == "rock") {
+          yourScore += 1;
+        } else if (opponent == "scissors") {
+          opponentScore += 1;
+        }
+      }
+    }
+
+    //show Score
+    var yscore = document.getElementById("your-score");
+    yscore.innerText = "Your Score = " + yourScore;
+    //console.log(yourScore);
+
+    let rock_high_score = 0;
+    if (yourScore > rock_high_score) {
+      rock_high_score = yourScore;
+      var getrock_score = rock_high_score.toString();
+      localStorage.setItem("rock_key", getrock_score);
+    }
+
+    var oscore = document.getElementById("opponent-score");
+    oscore.innerText = "Computer Score = " + opponentScore;
+  }
+
+
+</script>
+
+</html>

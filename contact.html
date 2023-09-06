@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Contact Arcade Games Paradise</title>
+    <link rel="website icon" type="png" href="/images/title_logo.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="style.css" rel="Stylesheet" type="text/css">
+
+</head>
+
+<body>
+
+    <header>
+        <div class="flex">
+            <div class="logo">
+                <a href="javascript:window.location.reload(true)">
+                    <img src="images/header_logo.png" alt="Logo">
+                </a>
+            </div>
+            <nav>
+                <ul id="nav-menu-container">
+
+                    <li>
+                        <a href="/index.html">Home</a>
+                    </li>
+                    <li>
+                        <a href="/support.html">Support</a>
+                    </li>
+                    <li>
+                        <a href="/about.html">About</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <div class="mainDiv">
+            <h1>Contact Form</h1>
+        </div>
+        <div class="mainDiv">
+            <div class="container">
+                <form onsubmit="send_email(); reset(); return false;">
+                    <label for="fname">Name</label>
+                    <input type="text" id="fname" name="fname" placeholder="Your name..">
+                    <label for="email">Email</label>
+                    <input type="text" id="email" name="email" placeholder="Your Email...">
+
+                    <label for="subject">Subject</label>
+                    <select id="sub" name="sub">
+                        <option value="feedback">Feedback</option>
+                        <option value="forBusiness">For Business</option>
+                        <option value="help">Help</option>
+                        <option value="other">other</option>
+                    </select>
+
+
+                    <textarea id="subject" name="subject" placeholder="Write something.."
+                        style="height:200px"></textarea>
+
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+        </div>
+
+        <style>
+            * {
+                box-sizing: border-box;
+
+            }
+
+            input[type=text],
+            select,
+            textarea {
+                width: 100%;
+                padding: 12px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box;
+                margin-top: 6px;
+                margin-bottom: 16px;
+                resize: vertical;
+            }
+
+            input[type=submit] {
+                background-color: #FFB320;
+                color: #131313;
+                padding: 12px 20px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+
+            input[type=submit]:hover {
+                background-color: #d09d11;
+            }
+
+            .mainDiv {
+                align-items: center;
+                justify-content: center;
+                display: flex;
+            }
+
+            .container {
+                width: 80%;
+                align-items: center;
+                justify-content: center;
+                border-radius: 5px;
+                background-color: #f2f2f2;
+                padding: 20px;
+                margin-bottom: 50px;
+            }
+        </style>
+
+    </main>
+    <footer>
+        <div class="flex">
+            <small>
+                Copyright &copy; 2024 All rights reserved
+
+                by
+                <a href="https://www.google.co.in/" target="_blank">Arcade Games Paradise</a>.
+            </small>
+            <ul>
+                <li>
+                    <a href="#top">Top</a>
+                </li>
+            </ul>
+        </div>
+    </footer>
+
+</body>
+<script src="https://smtpjs.com/v3/smtp.js"></script>
+<script>
+    function send_email() {
+        Email.send({
+            Host: "smtp.gmail.com",
+            Username: "mail from",
+            Password: "#",
+
+            To: 'Developer email',
+            From: document.getElementById("email").value,
+            Subject: "New Contact from User",
+            Body: "Subject:" + document.getElementById("sub").value +
+                "<br> Name:" + document.getElementById("fname").value +
+                "<br> Email:" + document.getElementById("email").value +
+                "<br> Message:" + document.getElementById("subject").value
+        }).then(
+            message => alert("Message sent Successfully.")
+        ).catch((error) => {
+            // An error happened.
+            alert(error);
+        });
+    }
+</script>
+
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="website icon" type="png" href="/images/title_logo.png">
+
+  <title>Catch the apple</title>
+  <style>
+    body {
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <h3>Catch the Apple</h3>
+  </div>
+</body>
+
+
+<script type="module">
+
+  // import kaboom lib
+  import kaboom from "https://unpkg.com/kaboom/dist/kaboom.mjs";
+
+  // initialize context
+  kaboom({
+    font: "sink",
+    background: [19, 228, 144],
+
+  })
+
+  // load assets (Player,apple,bugs)
+
+  loadSprite("gamer", "./img/gamer.png");
+  loadSprite("bug", "./img/bug.png");
+  loadSprite("apple", "./img/apple.png");
+
+  // Define game variables
+
+  const Speed = 620
+  let Bugspeed = 2
+  let Score = 0
+  let scoretext;
+  let bg = false;
+  let apple_highscore = 0;
+  let aphighscore;
+
+  // create function for display score
+  const displayscore = () => {
+    destroy(scoretext)
+
+    scoretext = add([
+      text("Score: " + Score),
+      pos(width() - 194, 84),
+      scale(3),
+      { value: 0 },
+    ])
+  }
+
+  const displayHighscore = () => {
+
+    aphighscore = add([
+      text("HighScore: " + apple_highscore),
+      pos(width() - 265, 55),
+      scale(3),
+      { value: 0 },
+    ])
+
+  }
+
+
+  // Add the player
+
+  const gamer = add([
+    sprite("gamer"), //player add
+    pos(120, 80),      //player position in game 
+    area(),           //has a collider
+    scale(0.03),      //player png size
+  ])
+
+  // setting arrow key to player movement 
+
+  onKeyDown("left", () => {
+    gamer.move(-Speed, 0)
+  })
+  onKeyDown("right", () => {
+
+    gamer.move(Speed, 0)
+  })
+  onKeyDown("up", () => {
+
+    gamer.move(0, -Speed)
+  })
+  onKeyDown("down", () => {
+
+    gamer.move(0, Speed)
+  })
+  // add the for loop for bugs and coffee it will appear every 4 sec on loop
+  loop(4, () => {
+    for (let i = 0; i < 4; i++) {
+      let x = rand(0, width())
+      let y = height()
+
+      let enemy = add([
+        sprite("bug"),  //enemy add
+        pos(x, y),      //enemy position in game 
+        area(),           //has a collider
+        scale(0.06),      //enemy png size
+        "bug"             // tag
+      ])
+
+      enemy.onUpdate(() => {
+        enemy.moveTo(enemy.pos.x, enemy.pos.y - Bugspeed)
+      })
+
+    }
+    let x = rand(0, width())
+    let y = height()
+
+    const Gapple = add([
+      sprite("apple"),  //apple add
+      pos(x, y),      //apple position in game 
+      area(),           //has a collider
+      scale(0.04),      //apple png size
+      "apple"             // tag
+    ])
+
+    Gapple.onUpdate(() => {
+      Gapple.moveTo(Gapple.pos.x, Gapple.pos.y - Bugspeed)
+    })
+    if (Bugspeed < 13) {
+      Bugspeed += 1
+    }
+  })
+
+  gamer.onCollide("bug", () => {
+    destroy(gamer)
+    addKaboom(gamer.pos)
+
+    setInterval(() => {
+
+    }, 1000);
+    if (confirm("Game Over...! \n Press OK to Restart ")) {
+      // user clicked OK
+      document.location.reload();
+    } else {
+      // user clicked Cancel
+
+    }
+
+
+  })
+
+  gamer.onCollide("apple", (apple) => {
+    // after collide with apple volume will be low
+    destroy(apple)
+    Score += 1
+    if (Score > apple_highscore) {
+      apple_highscore = Score;
+      localStorage.setItem("catchapple_key", apple_highscore)
+
+    }
+    let apple_chapple = localStorage.getItem("catchapple_key")
+
+    displayscore()
+    displayHighscore();
+
+  })
+
+
+
+</script>
+
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Profile Arcade Games Paradise</title>
+    <link rel="website icon" type="png" href="/images/title_logo.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="style.css" rel="Stylesheet" type="text/css">
+    <script type="module" src="app.js"></script>
+    <script type="module" src="/Games/score_save.js"></script>
+
+</head>
+
+<body>
+
+    <header>
+        <div class="flex">
+            <div class="logo">
+                <a href="javascript:window.location.reload(true)">
+                    <img src="images/header_logo.png" alt="Logo">
+                </a>
+            </div>
+            <nav>
+                <ul id="nav-menu-container">
+                    <li>
+                        <a href="/index.html" target="_self">Home</a>
+                    </li>
+                    <li>
+                        <a href="/contact.html" target="_blank">Contact</a>
+                    </li>
+                    <li>
+                        <a href="/support.html" target="_blank">Support</a>
+                    </li>
+                    <li>
+                        <a href="/about.html" target="_blank">About</a>
+                    </li>
+                </ul>
+            </nav>
+            <a id="logoutBtnP" href="" class="login-register-button">Log Out</a>
+        </div>
+    </header>
+
+    <main>
+
+        <div class=" profile">
+            <div class="profile-header">
+                <img class="profile-image" src="/images/profile.png" alt="Profile Image">
+                <div class="profile-info">
+                    <div class="profile-data">
+                        <h3>Name</h3>
+                        <span id="nameBox"></span>
+                    </div>
+                    <div class="profile-data">
+                        <h3>Email</h3>
+                        <span id="emailBox"></span>
+                    </div>
+                    <div class=" profile-data">
+                        <p>Last Login Time :<span id="lastloginBox"></span></p>
+
+                    </div>
+                </div>
+            </div>
+            <div>
+                <a id="get_scoreBtn" class="show_score">Show Score</a>
+            </div>
+            <div id="show_scores" style="display: none;">
+                <div class="high-scores">
+                    <h3>High Scores</h3>
+                    <ul>
+                        <li>Last Score Saved Time :<span id="save_time"></span></li>
+                        <br>
+                        <li>Ping Pong :<span id="pong_score"></span></li>
+                        <li>Chrome Dino :<span id="dino_score"></span></li>
+                        <li>Flappy Bird :<span id="flappy_score"></span></li>
+                        <li>Tetris :<span id="tetris_score"></span></li>
+                        <li>Snake :<span id="snake_score"></span></li>
+                        <li>Space Invaders :<span id="space_score"></span></li>
+                        <li>Catch the Apple :<span id="apple_score"></span></li>
+                        <li>Rock Paper Scissors :<span id="rock_score"></span></li>
+                    </ul>
+
+                </div>
+            </div>
+            <div class="about">
+                <h3>About</h3>
+                <p>
+                    Professional Gamer
+
+                </p>
+            </div>
+
+        </div>
+
+        <style>
+            * {
+                margin: 0;
+                box-sizing: border-box;
+            }
+
+            .profile {
+                background: whitesmoke;
+                margin: 50px;
+                padding: 50px;
+            }
+
+            .profile-header {
+                display: flex;
+                align-items: center;
+                margin-bottom: 50px;
+            }
+
+            .profile-image {
+                width: 180px;
+                height: 180px;
+                border-radius: 50%;
+                margin-right: 50px;
+            }
+
+            .profile-info {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+
+            .profile-data {
+                margin-bottom: 15px;
+            }
+
+            .profile-data h3 {
+                font-size: 24px;
+                font-weight: bold;
+                margin-bottom: 5px;
+            }
+
+            .profile-data span {
+                font-size: 18px;
+                color: #666;
+            }
+
+            .show_score {
+                background-color: #FFB320;
+                color: #131313;
+                border-radius: 20px;
+                padding: 10px 15px;
+                font-size: 0.85em;
+                font-weight: bolder;
+            }
+
+            .high-scores {
+                margin-top: 30px;
+                margin-bottom: 50px;
+            }
+
+            .high-scores h3 {
+                font-size: 24px;
+                font-weight: bold;
+                margin-bottom: 20px;
+            }
+
+
+            li {
+                font-size: 18px;
+                margin-bottom: 10px;
+            }
+
+            .about {
+                margin-top: 30px;
+                margin-bottom: 50px;
+            }
+
+            .about h3 {
+                font-size: 24px;
+                font-weight: bold;
+                margin-bottom: 20px;
+            }
+
+            .about p {
+                font-size: 18px;
+                color: #666;
+            }
+        </style>
+
+    </main>
+
+    <footer>
+        <div class="flex">
+            <small>
+                Copyright &copy; 2024 All rights reserved
+
+                by
+                <a href="https://www.google.co.in/" target="_blank">Arcade Games Paradise</a>.
+            </small>
+
+        </div>
+    </footer>
+
+</body>
+
+</html>
